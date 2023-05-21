@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "317618764513",
+    "project_id": "projectsova-f289a",
+    "storage_bucket": "projectsova-f289a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317618764513:android:f3f722b781cbb8d8dad5a0",
+        "android_client_info": {
+          "package_name": "com.projectsova"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317618764513-7196v4bftrm5l6h6re2otq5mhj69jfti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqItOC6Venemt-trXLOKf-EgKDmHBbnUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317618764513-7196v4bftrm5l6h6re2otq5mhj69jfti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

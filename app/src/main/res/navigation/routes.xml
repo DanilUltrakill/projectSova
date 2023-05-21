@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routes"
+    app:startDestination="@id/fragmentOfLogin">
+
+    <fragment
+        android:id="@+id/fragmentOfLogin"
+        android:name="com.projectsova.UI.FragmentOfLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentOfLogin_to_fragmentOfAddresses"
+            app:destination="@id/fragmentOfAddresses" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOfAddresses"
+        android:name="com.projectsova.UI.FragmentOfAddresses"
+        android:label="fragment_content"
+        tools:layout="@layout/fragment_content" >
+        <action
+            android:id="@+id/action_fragmentOfAddresses_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+        <action
+            android:id="@+id/action_fragmentOfAddresses_to_fragmentOfLogin"
+            app:destination="@id/fragmentOfLogin" />
+        <action
+            android:id="@+id/action_fragmentOfAddresses_to_fragmentOfMap"
+            app:destination="@id/fragmentOfMap" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.projectsova.UI.FragmentOfAddInfo"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_addinfo" >
+        <action
+            android:id="@+id/action_thirdFragment_to_fragmentOfAddresses"
+            app:destination="@id/fragmentOfAddresses" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOfMap"
+        android:name="com.projectsova.UI.FragmentOfMap"
+        android:label="fragment_of_map"
+        tools:layout="@layout/fragment_of_map" >
+        <action
+            android:id="@+id/action_fragmentOfMap_to_fragmentOfAddresses"
+            app:destination="@id/fragmentOfAddresses" />
+    </fragment>
+</navigation>

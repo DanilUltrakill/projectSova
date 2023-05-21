@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">projectSova</string>
+    <string name="txtLogIn">Введите идентификатор</string>
+    <string name="tvPassword">Введите пароль</string>
+    <string name="btnLogin">Авторизоваться</string>
+    <string name="btnAddInfo">Доп. инфо</string>
+    <string name="checkboxarrived">Доставлено</string>
+    <string name="txtLogo">Золотая сова</string>
+    <string name="testaddress">Улица Пушкина Дом Колотушкина</string>
+    <string name="timehint">время доставки</string>
+    <string name="listofproducts">Список продукции</string>
+    <string name="error_login">Неправильный логин или пароль</string>
+    <string name="error_cards">Ошибка загрузки данных</string>
+    <string name="error_addinfo">Ошибка загрузки счёт-фактуры</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

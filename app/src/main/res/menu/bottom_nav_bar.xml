@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_fragmentOfAddresses_to_fragmentOfLogin"
+        android:icon="@drawable/exit"
+        android:title="выход" />
+    <item
+        android:id="@+id/action_fragmentOfMap_to_fragmentOfAddresses"
+        android:icon="@drawable/list"
+        android:title="адреса" />
+    <item
+        android:id="@+id/action_fragmentOfAddresses_to_fragmentOfMap"
+        android:icon="@drawable/map"
+        android:title="карта"/>
+</menu>
