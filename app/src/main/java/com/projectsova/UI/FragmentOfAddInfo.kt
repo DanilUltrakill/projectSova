@@ -8,16 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.projectsova.R
-import com.projectsova.domain.data.Card
+import com.projectsova.domain.entity.Card
 import com.projectsova.databinding.FragmentAddinfoBinding
-import com.projectsova.domain.usecases.GetData
 import com.projectsova.presentation.AddInfoViewModel
-import com.projectsova.presentation.LoginViewModel
 import com.projectsova.presentation.StateAddInfo
-import com.projectsova.presentation.StateContent
 
 class FragmentOfAddInfo : Fragment(), CardAdapter.getaddinfoListener{
     private lateinit var binding: FragmentAddinfoBinding
@@ -40,6 +35,8 @@ class FragmentOfAddInfo : Fragment(), CardAdapter.getaddinfoListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservers()
+
+
     }
 
     fun setObservers(){

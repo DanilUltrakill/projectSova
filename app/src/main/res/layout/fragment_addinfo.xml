@@ -70,20 +70,9 @@
                 android:inputType="numberDecimal"
                 android:text="3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="+"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/button2"
@@ -94,6 +83,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button2"
+                app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,22 +121,18 @@
                 android:inputType="numberDecimal"
                 android:text="1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button12"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName12"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="70dp"
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:text="+"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button212"
                 app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal12"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button212"
@@ -180,20 +174,18 @@
                 android:inputType="numberDecimal"
                 android:text="15"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button13"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName1"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="70dp"
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button213"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal13"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button213"
@@ -235,20 +227,18 @@
                 android:inputType="numberDecimal"
                 android:text="4"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button122"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName122"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/button122"
-                android:layout_width="70dp"
+            <CheckBox
+                android:id="@+id/checkBox5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button2122"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal122"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button2122"
@@ -290,20 +280,18 @@
                 android:inputType="numberDecimal"
                 android:text="10"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button1223"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName1223"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
-            <Button
-                android:id="@+id/button1223"
-                android:layout_width="70dp"
+            <CheckBox
+                android:id="@+id/checkBox6"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button21223"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal1223"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/button21223"
@@ -325,3 +313,4 @@
             android:visibility="visible" />
     </LinearLayout>
 </ScrollView>
+

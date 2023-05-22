@@ -1,8 +1,7 @@
-package com.projectsova.domain.data
+package com.projectsova.domain.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.text.SimpleDateFormat
 
 @Parcelize
 data class Card(var id: Int,

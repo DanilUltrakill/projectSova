@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.projectsova.domain.data.Card
+import com.projectsova.domain.entity.Card
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 class AddressVIewModel: ViewModel() {

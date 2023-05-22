@@ -1,7 +1,6 @@
 package com.projectsova.UI
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.projectsova.R
-import com.projectsova.domain.data.AddInfoCard
-import com.projectsova.domain.data.Card
+import com.projectsova.domain.entity.Card
 import com.projectsova.databinding.FragmentContentBinding
-import com.projectsova.domain.usecases.GetData
 import com.projectsova.presentation.AddressVIewModel
-import com.projectsova.presentation.LoginViewModel
 import com.projectsova.presentation.StateContent
-import com.projectsova.presentation.StateLogin
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -67,6 +62,7 @@ class FragmentOfAddresses : Fragment(), CardAdapter.getaddinfoListener {
             }
             false
         }
+
     }
 
     fun setObservers(){
@@ -103,6 +99,10 @@ class FragmentOfAddresses : Fragment(), CardAdapter.getaddinfoListener {
             val itemTouchHelper = ItemTouchHelper(simpleCallback)
             itemTouchHelper.attachToRecyclerView(recyclerforcards)
         }
+        var badge = binding.bottomNavigation.getOrCreateBadge(R.id.action_fragmentOfMap_to_fragmentOfAddresses)
+        badge.isVisible = true
+        // An icon only badge will be displayed unless a number is set:
+        badge.number = viewmodel.cardList.size
     }
 
     fun renderError(){
