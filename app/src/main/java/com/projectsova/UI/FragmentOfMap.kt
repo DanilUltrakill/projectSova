@@ -16,7 +16,6 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 
-
 class FragmentOfMap : Fragment() {
 
     lateinit var navController: NavController
@@ -33,7 +32,6 @@ class FragmentOfMap : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentOfMapBinding.inflate(inflater)
         navController = NavHostFragment.findNavController(this)
         mapView = binding.mapview
@@ -41,14 +39,20 @@ class FragmentOfMap : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        MapKitFactory.getInstance().onStart()
+        mapView.onStart()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        MapKitFactory.getInstance().onStop()
         mapView.onStop()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         mapView.map.move(
             CameraPosition(Point(54.987041, 82.915476), 5.0f, 0.0f, 0.0f),
