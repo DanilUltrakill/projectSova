@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#C4D9D9E3"
     android:orientation="vertical"
-    tools:context=".UI.FragmentOfLogin">
+    tools:context=".presentation.Login.FragmentOfLogin">
 
     <ImageView
         android:id="@+id/imgSova"

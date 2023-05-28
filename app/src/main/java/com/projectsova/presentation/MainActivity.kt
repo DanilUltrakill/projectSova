@@ -1,11 +1,8 @@
-package com.projectsova.UI
+package com.projectsova.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
 import com.projectsova.databinding.ActivityMainBinding
-import com.projectsova.presentation.LoginViewModel
-import com.yandex.mapkit.MapKitFactory
 
 class MainActivity : AppCompatActivity() {
 

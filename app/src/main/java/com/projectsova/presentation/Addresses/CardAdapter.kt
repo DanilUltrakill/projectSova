@@ -1,4 +1,4 @@
-package com.projectsova.UI
+package com.projectsova.presentation.Addresses
 
 import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
@@ -13,7 +13,7 @@ import com.projectsova.databinding.ListofaddressBinding
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CardAdapter(val cardList: ArrayList<Card>, private val listener: getaddinfoListener ): RecyclerView.Adapter<CardAdapter.CardHolder>() {
+class CardAdapter(val cardList: ArrayList<Card>, private val listener: getaddinfoListener): RecyclerView.Adapter<CardAdapter.CardHolder>() {
 
     class CardHolder(item: View): RecyclerView.ViewHolder(item) {
         val binding = ListofaddressBinding.bind(item)

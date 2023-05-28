@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentOfLogin"
-        android:name="com.projectsova.UI.FragmentOfLogin"
+        android:name="com.projectsova.presentation.Login.FragmentOfLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentOfAddresses"
-        android:name="com.projectsova.UI.FragmentOfAddresses"
+        android:name="com.projectsova.presentation.Addresses.FragmentOfAddresses"
         android:label="fragment_content"
         tools:layout="@layout/fragment_content" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.projectsova.UI.FragmentOfAddInfo"
+        android:name="com.projectsova.presentation.AddInfo.FragmentOfAddInfo"
         android:label="fragment_third"
         tools:layout="@layout/fragment_addinfo" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentOfMap"
-        android:name="com.projectsova.UI.FragmentOfMap"
+        android:name="com.projectsova.presentation.FragmentOfMap"
         android:label="fragment_of_map"
         tools:layout="@layout/fragment_of_map" >
         <action

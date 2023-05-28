@@ -1,4 +1,4 @@
-package com.projectsova.UI
+package com.projectsova.presentation.AddInfo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,8 +11,7 @@ import androidx.fragment.app.viewModels
 import com.projectsova.R
 import com.projectsova.domain.entity.Card
 import com.projectsova.databinding.FragmentAddinfoBinding
-import com.projectsova.presentation.AddInfoViewModel
-import com.projectsova.presentation.StateAddInfo
+import com.projectsova.presentation.Addresses.CardAdapter
 
 class FragmentOfAddInfo : Fragment(), CardAdapter.getaddinfoListener{
     private lateinit var binding: FragmentAddinfoBinding

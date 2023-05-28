@@ -1,9 +1,8 @@
-package com.projectsova.UI
+package com.projectsova.presentation.Login
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +14,6 @@ import androidx.navigation.fragment.NavHostFragment
 import com.projectsova.R
 import com.projectsova.databinding.FragmentLoginBinding
 import com.projectsova.domain.usecases.GetData
-import com.projectsova.presentation.LoginViewModel
-import com.projectsova.presentation.StateLogin
 
 class FragmentOfLogin : Fragment() {
 

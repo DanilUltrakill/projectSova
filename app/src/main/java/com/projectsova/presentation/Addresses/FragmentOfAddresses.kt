@@ -1,4 +1,4 @@
-package com.projectsova.UI
+package com.projectsova.presentation.Addresses
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.projectsova.R
 import com.projectsova.domain.entity.Card
 import com.projectsova.databinding.FragmentContentBinding
-import com.projectsova.presentation.AddressVIewModel
-import com.projectsova.presentation.StateContent
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -56,7 +54,9 @@ class FragmentOfAddresses : Fragment(), CardAdapter.getaddinfoListener {
                     return@setOnItemSelectedListener true
                 }
                 R.id.action_fragmentOfAddresses_to_fragmentOfMap -> {
-                    navController.navigate(R.id.action_fragmentOfAddresses_to_fragmentOfMap)
+                    val bundle = Bundle()
+                    bundle.putString("address", viewmodel.getFirstAddress())
+                    navController.navigate(R.id.action_fragmentOfAddresses_to_fragmentOfMap, bundle)
                     return@setOnItemSelectedListener true
                 }
             }
@@ -72,7 +72,7 @@ class FragmentOfAddresses : Fragment(), CardAdapter.getaddinfoListener {
     private fun handleState(state: StateContent) {
         when (state) {
             is StateContent.Initial,
-            StateContent.Loading-> renderLoading()
+            StateContent.Loading -> renderLoading()
 
             is StateContent.Content -> renderContent()
 

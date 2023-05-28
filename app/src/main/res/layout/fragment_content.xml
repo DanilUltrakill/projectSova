@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundRW"
     android:orientation="vertical"
-    tools:context=".UI.FragmentOfAddresses">
+    tools:context=".presentation.Addresses.FragmentOfAddresses">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

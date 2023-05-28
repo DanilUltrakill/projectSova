@@ -1,4 +1,4 @@
-package com.projectsova.presentation
+package com.projectsova.presentation.Login
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -38,7 +38,6 @@ open class LoginViewModel : ViewModel() {
                     password = user.get("password").toString()
                 }
             }
-            Log.w("GetPass", "$userName = $password")
         }.addOnFailureListener{
             Log.w("GetPass", "User not found", it)
         }.addOnCompleteListener {

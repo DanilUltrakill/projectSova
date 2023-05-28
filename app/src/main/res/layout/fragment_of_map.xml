@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.FragmentOfMap">
+    tools:context=".presentation.FragmentOfMap">
 
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapview"

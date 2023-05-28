@@ -1,7 +1,7 @@
-package com.projectsova.UI
+package com.projectsova.presentation
 
 import android.Manifest
-import android.R
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PointF
@@ -9,40 +9,62 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.projectsova.data.MapKitInitializer
 import com.projectsova.databinding.FragmentOfMapBinding
-import com.yandex.mapkit.Animation
-import com.yandex.mapkit.MapKit
-import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.directions.driving.DrivingRoute
-import com.yandex.mapkit.directions.driving.DrivingSession
+import com.yandex.mapkit.*
+import com.yandex.mapkit.directions.DirectionsFactory
+import com.yandex.mapkit.directions.driving.*
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
-import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.map.IconStyle
-import com.yandex.mapkit.map.RotationType
+import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.mapkit.search.*
 import com.yandex.mapkit.traffic.TrafficLayer
 import com.yandex.mapkit.user_location.UserLocationLayer
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.Error
 import com.yandex.runtime.image.ImageProvider
+import com.yandex.runtime.network.NetworkError
+import com.yandex.runtime.network.RemoteError
 
 
-class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.DrivingRouteListener {
+class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.DrivingRouteListener,
+    Session.SearchListener, CameraListener {
 
     lateinit var navController: NavController
     lateinit var binding: FragmentOfMapBinding
 
     lateinit var mapKit: MapKit
     lateinit var mapView: MapView
+
     lateinit var userLocLayer: UserLocationLayer
     lateinit var trafficLayer: TrafficLayer
+
+    lateinit var searchManager: SearchManager
+    lateinit var searchSession: Session
+
+    lateinit var mapObjects: MapObjectCollection
+
+    lateinit var drivingRouter: DrivingRouter
+    lateinit var  drivingSession: DrivingSession
+
+    private lateinit var ROUTE_START_LOCATION: Point
+    private lateinit var ROUTE_END_LOCATION: Point
+    private lateinit var SCREEN_CENTER: Point
+
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    lateinit var address: String
+    lateinit var resultLocation: Point
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +77,9 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
     ): View? {
         binding = FragmentOfMapBinding.inflate(inflater)
         navController = NavHostFragment.findNavController(this)
+
+        address = arguments?.getString("address")!!
+
         mapView = binding.mapview
         mapKit = MapKitFactory.getInstance()
 
@@ -69,6 +94,14 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
         userLocLayer.isHeadingEnabled = true
 
         userLocLayer.setObjectListener(this)
+
+        SearchFactory.initialize(requireContext())
+        searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED)
+
+        mapView.map.addCameraListener(this)
+
+        drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
+        mapObjects = mapView.map.mapObjects.addCollection()
 
         return binding.root
     }
@@ -95,11 +128,42 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        submitQuery(address)
+
         mapView.map.move(
-            CameraPosition(Point(54.987041, 82.915476), 12.0f, 0.0f, 0.0f),
+            CameraPosition(Point(59.945933, 30.320045), 12.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 0F),
             null
         )
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun submitRequest() {
+
+        val drivingOptions = DrivingOptions()
+        val vehicleOptions = VehicleOptions()
+
+        val requestPoints: ArrayList<RequestPoint> = ArrayList()
+        requestPoints.add(
+            RequestPoint(
+                ROUTE_START_LOCATION,
+                RequestPointType.WAYPOINT,
+                null
+            )
+        )
+        requestPoints.add(
+            RequestPoint(
+                ROUTE_END_LOCATION,
+                RequestPointType.WAYPOINT,
+                null
+            )
+        )
+        drivingSession =
+            drivingRouter.requestRoutes(requestPoints, drivingOptions, vehicleOptions, this)
+    }
+
+    private fun submitQuery(query:String){
+        searchSession = searchManager.submit(query, VisibleRegionUtils.toPolygon(mapView.map.visibleRegion), SearchOptions(), this)
     }
 
     override fun onObjectAdded(userLocationView: UserLocationView) {
@@ -148,10 +212,63 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
     }
 
     override fun onDrivingRoutes(p0: MutableList<DrivingRoute>) {
-        TODO("Not yet implemented")
+        for (route in p0){
+            mapObjects!!.addPolyline(route.geometry)
+        }
     }
 
     override fun onDrivingRoutesError(p0: Error) {
-        TODO("Not yet implemented")
+        Toast.makeText(requireContext(),"Ошибка!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSearchResponse(response: Response) {
+        mapObjects = mapView.map.mapObjects
+        //mapObjects.clear(
+        for(searchResult in response.collection.children){
+            resultLocation = searchResult.obj!!.geometry[0].point!!
+
+            mapObjects.addPlacemark(resultLocation,ImageProvider.fromResource(requireContext(),com.projectsova.R.drawable.search_result))
+
+            getLocations()
+            return
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocations() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: android.location.Location ->
+            ROUTE_START_LOCATION = Point(location.latitude.toString().toDouble(), location.latitude.toString().toDouble())
+        }.addOnCompleteListener {
+            ROUTE_END_LOCATION = resultLocation
+
+            SCREEN_CENTER = Point(
+                (ROUTE_START_LOCATION.latitude + ROUTE_END_LOCATION.latitude) / 2,
+                (ROUTE_START_LOCATION.longitude + ROUTE_END_LOCATION.longitude) / 2
+            )
+            submitRequest()
+        }
+    }
+
+
+    override fun onSearchError(p0: Error) {
+        var errorMessage = "Неизвестная ошибка!"
+        if (p0 is RemoteError){
+            errorMessage = "Другая ошибка!"
+        }else if (p0 is NetworkError){
+            errorMessage = "Проблема с соединением!"
+        }
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCameraPositionChanged(
+        map: Map,
+        cameraPosition: CameraPosition,
+        cameraUpdateReason: CameraUpdateReason,
+        finished: Boolean
+    ) {
+        if(finished){
+            submitQuery(address)
+        }
     }
 }

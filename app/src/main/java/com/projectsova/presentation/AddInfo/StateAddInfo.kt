@@ -1,4 +1,4 @@
-package com.projectsova.presentation
+package com.projectsova.presentation.AddInfo
 
 sealed class StateAddInfo{
 

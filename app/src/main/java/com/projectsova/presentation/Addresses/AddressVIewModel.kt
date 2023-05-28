@@ -1,4 +1,4 @@
-package com.projectsova.presentation
+package com.projectsova.presentation.Addresses
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -61,6 +61,14 @@ class AddressVIewModel: ViewModel() {
         }
         cardList.sortWith(compareBy{it.id})
         _stateContent.value = StateContent.Content
+    }
+
+    fun getFirstAddress(): String{
+        for (addresses in cardList){
+            if (!addresses.arrived)
+                return addresses.address
+        }
+        return ""
     }
 
     fun sendData(cardList: ArrayList<Card>){

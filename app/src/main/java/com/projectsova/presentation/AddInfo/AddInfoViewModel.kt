@@ -1,11 +1,13 @@
-package com.projectsova.presentation
+package com.projectsova.presentation.AddInfo
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 class AddInfoViewModel: ViewModel() {
@@ -52,8 +54,6 @@ class AddInfoViewModel: ViewModel() {
                     }
                 }
             }
-            Log.w("vm3", productString)
-            Log.w("vm3", "${productList.size}")
         }.addOnFailureListener {
             Log.w("vm3", "not working", it)
         }.addOnCompleteListener {
