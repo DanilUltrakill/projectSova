@@ -163,7 +163,7 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
     }
 
     private fun submitQuery(query:String){
-        searchSession = searchManager.submit(query, VisibleRegionUtils.toPolygon(mapView.map.visibleRegion), SearchOptions(), this)
+        searchSession = searchManager.submit("город Новосибирск $query", VisibleRegionUtils.toPolygon(mapView.map.visibleRegion), SearchOptions(), this)
     }
 
     override fun onObjectAdded(userLocationView: UserLocationView) {
@@ -224,32 +224,40 @@ class FragmentOfMap : Fragment(), UserLocationObjectListener, DrivingSession.Dri
     override fun onSearchResponse(response: Response) {
         mapObjects = mapView.map.mapObjects
         //mapObjects.clear(
-        for(searchResult in response.collection.children){
+        resultLocation = response.collection.children[0].obj!!.geometry[0].point!!
+        ROUTE_END_LOCATION = resultLocation
+        mapObjects.addPlacemark(resultLocation,ImageProvider.fromResource(requireContext(),com.projectsova.R.drawable.search_result))
+
+        getLocations()
+
+        /*for(searchResult in response.collection.children){
             resultLocation = searchResult.obj!!.geometry[0].point!!
 
-            mapObjects.addPlacemark(resultLocation,ImageProvider.fromResource(requireContext(),com.projectsova.R.drawable.search_result))
-
-            getLocations()
-            return
-        }
+        }*/
     }
 
     @SuppressLint("MissingPermission")
     private fun getLocations() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         fusedLocationProviderClient.lastLocation.addOnSuccessListener { location: android.location.Location ->
-            ROUTE_START_LOCATION = Point(location.latitude.toString().toDouble(), location.latitude.toString().toDouble())
+            ROUTE_START_LOCATION = Point(location.latitude.toString().toDouble(), location.longitude.toString().toDouble())
         }.addOnCompleteListener {
-            ROUTE_END_LOCATION = resultLocation
+            //ROUTE_END_LOCATION = resultLocation
 
             SCREEN_CENTER = Point(
                 (ROUTE_START_LOCATION.latitude + ROUTE_END_LOCATION.latitude) / 2,
                 (ROUTE_START_LOCATION.longitude + ROUTE_END_LOCATION.longitude) / 2
             )
+
+            /*mapView.map.move(
+                CameraPosition(SCREEN_CENTER, 12.0f, 0.0f, 0.0f),
+                Animation(Animation.Type.SMOOTH, 0F),
+                null
+            )*/
+
             submitRequest()
         }
     }
-
 
     override fun onSearchError(p0: Error) {
         var errorMessage = "Неизвестная ошибка!"
